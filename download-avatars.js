@@ -1,7 +1,9 @@
 var request = require("request");
 var https = require("https");
-
 var fs = require("fs");
+
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
 
 var GITHUB_USER = "AbhiMuthukumar";
 var GITHUB_TOKEN = "ab8e2c32ebb6caa3317578f011d3cf48a25c4b74";
@@ -31,15 +33,21 @@ function downloadImageByURL(url, filePath) {
     return console.error(error);
   })
   .on('response', function(response){
-    console.log("Status Code : ", response.statusCode);
+    //console.log("Status Code : ", response.statusCode);
   })
   .pipe(fs.createWriteStream(filePath))
 }
 
 //downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./avatars/kvirani.jpg")
 
-getRepoContributors("jquery", "jquery", function(contributors){
-  Object.keys(contributors).forEach((index) => {
-    downloadImageByURL(contributors[index].avatar_url, "./avatars/"+contributors[index].login+".jpg");
+if(repoOwner && repoName){
+  getRepoContributors(repoOwner, repoName, function(contributors){
+    Object.keys(contributors).forEach((index) => {
+      downloadImageByURL(contributors[index].avatar_url, "./avatars/"+contributors[index].login+".jpg");
+    });
   });
-});
+  console.log("Images Downloaded!")
+}
+else{
+  console.log("Enter Repo-Owner and Repo-Name to download avatars.")
+}
