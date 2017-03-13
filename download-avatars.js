@@ -11,7 +11,7 @@ var GITHUB_TOKEN = "ab8e2c32ebb6caa3317578f011d3cf48a25c4b74";
 //LHL token 1 - 3a93ef87edec239305026b8f501a3cd878fb7160
 
 function getRepoContributors(repoOwner, repoName, callback){
-  var requestOptions ={
+  var requestOptions = {
     url : "https://" + GITHUB_USER + ":" + GITHUB_TOKEN + "@api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     headers : {
       "User-Agent" : "Github Avatar Downloader"
@@ -24,7 +24,7 @@ function getRepoContributors(repoOwner, repoName, callback){
     if(response.statusCode === 200){
       callback(JSON.parse(response.body));
     }
-  })
+  });
 }
 
 function downloadImageByURL(url, filePath) {
