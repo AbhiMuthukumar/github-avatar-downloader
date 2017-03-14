@@ -1,12 +1,13 @@
 var request = require("request");
 var https = require("https");
 var fs = require("fs");
+require('dotenv').config();
 
 var repoOwner = process.argv[2];
 var repoName = process.argv[3];
 
-var GITHUB_USER = "AbhiMuthukumar";
-var GITHUB_TOKEN = "ab8e2c32ebb6caa3317578f011d3cf48a25c4b74";
+var GITHUB_USER = process.env.GIT_USER;
+var GITHUB_TOKEN = process.env.GIT_TOKEN;
 //LHL Exercise = ab8e2c32ebb6caa3317578f011d3cf48a25c4b74
 //LHL token 1 - 3a93ef87edec239305026b8f501a3cd878fb7160
 
